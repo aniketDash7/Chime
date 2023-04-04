@@ -1,0 +1,131 @@
+{% extends 'formbase.html' %}
+
+{% block title %} Register {% endblock %}
+
+{% block content %}
+
+    <div class="container introSign">
+
+        <div class="intro">
+
+            <h1><i class="fa-solid fa-bell"></i> Chime </h1>
+            <p>Connect. Post. Follow</p>
+    
+        </div>
+
+        <div class="signupForm">
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                <fieldset class="form_group">
+                    <legend class="border-bottom mb-4">Sign In</legend>
+                    <div class="form-group">
+    
+                        {{form.username.label(class='form-control-label')}}
+                        {% if form.username.errors %}
+                            {{form.username(class='form-control form-control-lg is-invalid')}}
+                            <div class="invalid-feedback">
+                                {% for error in form.username.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.username(class='form-control form-control-lg') }} 
+                        {% endif %}
+    
+    
+                    </div>
+                    <div class="form-group">
+    
+                        {{form.password.label(class='form-control-label')}}
+                        {% if form.password.errors %}
+                            {{form.password(class='form-control form-control-lg is-invalid')}}
+                            <div class="invalid-feedback">
+                                {% for error in form.password.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.password(class='form-control form-control-lg') }} 
+                        {% endif %}
+    
+    
+                    </div>
+                    <div class="form-group">
+    
+                        {{form.confirm_password.label(class='form-control-label')}}
+                        {% if form.confirm_password.errors %}
+                        {{form.confirm_password(class='form-control form-control-lg is-invalid')}}
+                        <div class="invalid-feedback">
+                            {% for error in form.confirm_password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                            {{ form.confirm_password(class='form-control form-control-lg') }} 
+                        {% endif %}
+    
+                    </div>
+                    
+                    </fieldset>
+                    <div class="submitButton form-group">
+    
+                        {{form.submit(class='btn btn-outline-info')}}
+    
+                    </div>
+    
+            </form>
+        </div>
+
+    </div>
+    <a class="login" href="{{url_for('login')}}">Login</a>
+
+
+
+    <style>
+
+
+        .introSign{
+    
+            display: flex;
+            width:100%;
+            height:95vh;
+            justify-content: space-around;
+            align-items: center;
+            text-align: center;
+    
+        }
+    
+        .introSign h1{
+    
+            text-transform: uppercase;
+            letter-spacing: 0.7rem;
+            font-weight: 100;
+    
+        }
+    
+        .submitButton{
+    
+            margin-top: 1rem;
+    
+        }
+        .login{
+    
+            border: 2px solid black;
+            margin-left: 1rem;
+            padding:0.3rem; 
+            border-radius: 5px;
+            text-decoration:none;
+            color:black;
+            transition:all 0.2s;
+    
+        }
+        
+        .login:hover{
+
+            color:white;
+            background-color: black;
+
+        }
+    </style>
+
+{% endblock %}

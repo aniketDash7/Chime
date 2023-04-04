@@ -1,0 +1,93 @@
+body{
+
+  background-color: #f3f4f6;
+  font-family: 'Montserrat', sans-serif;
+
+}
+
+hr{
+
+  border: none;
+
+}
+
+.navSec{
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: black;
+  height:10vh;
+  margin-bottom: 1rem;
+
+}
+
+.navSec a{
+
+  color:white;
+
+}
+
+.brand{
+
+  font-size: 2rem;
+
+}
+
+#hometag{
+
+  font-size:1.2rem;
+
+}
+
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+::-webkit-scrollbar-track {
+    background: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #28282b;
+}
+
+a{
+
+  color:#2F2F2F;
+  transition:all 0.2s;
+
+}
+
+a:hover{
+
+  color:brown;
+  text-decoration: none;
+
+}
+
+p{
+
+  color:#2F2F2F;
+
+}
+
+h3{
+
+  color:#2F2F2F;
+
+}
+
+.sidebar{
+
+  background-color:white;
+  padding:2rem;
+  margin-top: 4.3rem;
+  color:#FFF4E9;
+  border-radius: 30px;
+  box-shadow: 12px 17px 12px 0px rgba(0,0,0,0.1);
+
+}
+

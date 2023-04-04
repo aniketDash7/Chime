@@ -1,0 +1,130 @@
+hr{
+
+    border:none;
+    height:0.2rem;
+    background-color: #2f2f2f;
+
+}
+
+.followbutton input[type="submit"]{
+
+    border:green 2px solid;
+    color:green;
+    transition:0.2s all;
+
+}
+
+.followbutton input[type="submit"]:hover{
+
+    background-color:green;
+    color:white;
+
+}
+
+.unfollowbutton input[type="submit"]{
+
+    border:red 2px solid;
+    color:red;
+    transition:0.2s all;
+
+}
+
+.unfollowbutton input[type="submit"]:hover{
+
+    background-color:red;
+    color:white;
+
+}
+
+.info{
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    
+}
+
+
+.credential{
+
+    color:white;
+    background-color: black;
+    padding:0.3rem;
+
+}
+
+.postTitle{
+
+    font-size: larger;
+    margin: 2rem 0;
+    text-transform: uppercase;
+    color:#2f2f2f;
+
+}
+
+#userspan{
+
+    background-color: black;
+    padding:0.2rem;
+    margin-right:0.1rem;
+    color:white;
+
+}
+
+.usermeta{
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+#followButton{
+
+    border:#f28482 solid 2px;
+    padding:0.5rem;
+    background-color: blanchedalmond;
+    transition:all 0.2s;
+
+}
+
+#followButton:hover{
+
+    border:black 2px solid;
+
+}
+
+.propic{
+
+    width:125px;
+    height:125px;
+    margin-right:1rem;
+
+}
+
+.peopleSection{
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin:1rem;
+
+}
+
+.postContainer{
+
+    padding:2rem;
+    background-color:white;
+    margin:2rem;
+    border-radius: 30px;
+    box-shadow: 12px 17px 12px 0px rgba(0,0,0,0.1);
+
+}
+
+.postContainer h1{
+
+    color:#2f2f2f;
+
+}
+
+

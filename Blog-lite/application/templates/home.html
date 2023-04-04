@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block style %}
+
+    <link rel="stylesheet" href="{{url_for('static',filename='home.css')}}">
+
+{% endblock %}
+
+{% block content %}
+    <div class="introSection">
+        <img style="width:100px;height:100px;" class="rounded-circle" src="/static/profilePics/{{ current_user.propic }}" alt="">
+        <h2>{{ current_user.username }}'s Feed</h2>
+    </div>
+
+    <div class="opSection container">
+        <a class="postItem" href="{{ url_for('account') }}"><i class="fa-solid fa-user"></i></a>
+        <a class="postItem" href="{{ url_for('post') }}"><i class="fa-solid fa-pen-nib"></i></a>
+        <a class="postItem" href="{{ url_for('logout') }}"><i class="fa-solid fa-right-from-bracket"></i></a>
+    </div>
+    
+
+    <div class="container">
+        {% if feedPosts %}
+
+            {% for post in feedPosts %}
+                {% if post.author == current_user %}
+                    <div class="postContainer">
+                        <h1><a href="{{ url_for('zoomPost', id=post.id) }}">{{ post.title }}</a></h1>
+                        <hr>
+                        <p><span class="credential">By <a href="profile/{{ post.author.username }}">{{ post.author.username }}</a> on {{ post.timeStamp.strftime('%d-%m-%Y') }} </span></p>
+                        {% if post.desc|length > 250 %}
+                            <a style="display:block" data-toggle="collapse" href="#long-desc-{{post.id}}">View the whole thing .. </a>
+                            
+                            <div id="long-desc-{{post.id}}" class="collapse">
+                                <div class="card">
+                                    <p>{{ post.desc }}</p>    
+                                </div>
+                            </div>
+                        {% else %}
+                            <p>{{ post.desc }}</p>
+                        {% endif %}
+
+                        {% if post.imageUrl %}
+                            <img style="height:200px; border-radius: 10px;" src="/static/images/{{post.imageUrl}}" alt="">
+                        {% endif %}
+                        <div id="comments-{{post.id}}" class="collapse">
+                            <div class="card">
+                                <div id="comments-expanded-{{post.id}}" class="card-body">
+                                    {% for comment in post.comments %}
+                                        <div class="comSec">
+                                        
+                                        <span class="commentor"><a href="profile/{{comment.author.username}}">{{comment.author.username}}</a></span>
+                                        
+                                        <span class="commentActual"><p>{{comment.text}}</p> </span>
+                                            <small>{{comment.commentTime.strftime('%d-%m-%Y')}}</small>
+                                            {% if current_user == comment.author or current_user == post.author  %}
+                                                <a href="/delete-comment/{{comment.id}}"><i class="fa-solid fa-trash"></i></a>
+                                            {% endif %}
+                                        </div>
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="likeSec">
+                            {{ post.likes|length }}
+                            {% if current_user.id in post.likes|map(attribute="author")|list %}
+                                <a href="/like/{{post.id}}"><i class="fa-solid fa-heart"></i></a>
+                            {% else %}  
+                                <a href="/like/{{post.id}}"><i class="fa-regular fa-heart"></i></a>
+                            {% endif %}
+                            {% if post.likes|length > 0  %}
+                                <a style="display:block" data-toggle="collapse" href="#showLikes">See who liked this</a>
+                                <div id="showLikes" class="collapse">
+                                    {% for like in post.likes %}
+                                        <small><a href="/profile/{{like.author.username}}">{{ like.author.username }}</a></small><br>
+                                    {% endfor %}
+                                </div>
+
+                            {% endif %}
+                        </div>
+                        <p class="card-text">
+                            {% if post.comments|length > 0 %}
+                                <a data-toggle="collapse" href="#comments-{{post.id}}" role="button">
+                                    <small> View {{post.comments|length}} comments</small> 
+                                </a>
+                                
+                                {% else %}
+                                    <small>
+                                        No comments
+                                    </small>
+                            {% endif %}
+                        </p>
+
+                    </div>
+                {% else %}
+                    <div class="followerPostContainer">
+                        <h1><a href="{{ url_for('zoomPost', id=post.id) }}">{{ post.title }}</a></h1>
+                        <hr>
+                        <p><span class="followerCredential">By <a href="profile/{{ post.author.username }}">{{ post.author.username }}</a> on {{ post.timeStamp.strftime('%d-%m-%Y')}} </span></p>
+                        {% if post.desc|length > 250 %}
+                            <a style="display:block" data-toggle="collapse" href="#long-desc-{{post.id}}">View the whole thing .. </a>
+                            
+                            <div id="long-desc-{{post.id}}" class="collapse">
+                                <div class="card">
+                                    <p>{{ post.desc }}</p>    
+                                </div>
+                            </div>
+                        {% else %}
+                            <p>{{ post.desc }}</p>
+                        {% endif %}
+                        {% if post.imageUrl %}
+                            <img style="height:200px; border-radius: 10px;" src="/static/images/{{post.imageUrl}}" alt="">
+                        {% endif %}
+                        <div id="comments-{{post.id}}" class="collapse">
+                            <div class="card">
+                                <div id="comments-expanded-{{post.id}}" class="card-body">
+                                    {% for comment in post.comments %}
+                                        <div class="comSec">
+                                        
+                                        <span class="commentor"><a href="profile/{{comment.author.username}}">{{comment.author.username}}</a></span>
+                                        <span class="commentActual"><p>{{comment.text}}</p> </span>
+                                        
+                                            <small>{{comment.commentTime.strftime('%d-%m-%Y')}}</small>
+                                            {% if current_user == comment.author or current_user == post.author  %}
+                                                <a href="/delete-comment/{{comment.id}}"><i class="fa-solid fa-trash"></i></a>
+                                            {% endif %}
+                                        </div>
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="likeSec">
+                            {{ post.likes|length }}
+                            {% if current_user.id in post.likes|map(attribute="author")|list %}
+                                <a href="/like/{{post.id}}"><i class="fa-solid fa-heart"></i></a>
+                            {% else %}  
+                                <a href="/like/{{post.id}}"><i class="fa-regular fa-heart"></i></a>
+                            {% endif %}
+                            {% if post.likes|length > 0  %}
+                                <a style="display:block" data-toggle="collapse" href="#showLikes-{{post.id}}">See who liked this</a>
+                                <div id="showLikes-{{post.id}}" class="collapse">
+                                    {% for like in post.likes %}
+                                        <small><a href="/profile/{{ like.author.username }}">{{ like.author.username }}</a></small><br>
+                                    {% endfor %}
+                                </div>
+
+                            {% endif %}
+                        </div>
+                        <p class="card-text">
+                            {% if post.comments|length > 0 %}
+                                <a data-toggle="collapse" href="#comments-{{post.id}}" role="button">
+                                    <small> View {{post.comments|length}} comments</small> 
+                                </a>
+                                
+                                {% else %}  
+                                    <p>No comments</p>
+                            {% endif %}
+                        </p>
+   
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <h1>Feels empty here !</h1>
+        {% endif %}
+
+    </div>
+
+
+{% endblock %}
+{% block sidebar %}
+
+
+<h3>People To Follow</h3>
+<p>See people on this app</p>
+
+<form class="usersearcher form-inline my-2 my-lg-0" method="GET">
+    <input type="search" placeholder="Search for users" name="user_query">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+
+{% for user in users %}
+    {% if user!= current_user %}
+
+    <div class="peopleSection">
+        <a href="{{ url_for('profile', username=user.username) }}">{{ user.username }}</a>
+        <img class="rounded-circle" style="height:50px;width:50px;" src="static/profilePics/{{ user.propic }}">
+    </div>
+    
+    {% endif %}
+{% endfor %}
+
+
+{% endblock %}

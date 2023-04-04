@@ -1,0 +1,149 @@
+.credential a{
+
+    color:white;
+
+}
+
+.credential a:hover{
+
+    color:gold;
+
+}
+.postContainer{
+
+    padding:2rem;
+    background-color:white;
+    margin:2rem;
+    border-radius: 30px;
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1);
+
+}
+
+h2{
+
+    text-align: center;
+
+}
+
+hr{
+
+    border: none;
+    height:0.2rem;
+    background-color:#2F2F2F;
+    
+
+}
+
+.introSection{
+
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    gap:2rem;
+
+}
+
+.followerPostContainer{
+
+    padding:2rem;
+    background-color:white;
+    margin:2rem;
+    border-radius: 30px;
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1),0px 10px 15px -3px rgba(0,0,0,0.1);
+    border:2px red solid;
+
+}
+
+.followerCredential{
+
+    color:white;
+    background-color: red;
+    padding:0.3rem;
+    
+}
+
+.followerCredential a{
+
+    color:white;
+
+}
+
+.followerCredential a:hover{
+
+    color:gold;
+
+}
+
+.comSec{
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.usersearcher input[type="search"]{
+
+    border:2px solid #5cb85c;
+    border-radius: 3px;
+    height:2.5rem;
+    margin-right: 0.1rem;
+
+}
+
+.commentor{
+
+    background-color: blanchedalmond;
+    padding:0.2rem;
+
+}
+
+.commentActual{
+
+    max-width: 8rem;
+    max-height: 5rem;
+    overflow: scroll;
+
+}
+
+.opSection{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:1rem;
+
+}
+
+.postItem{
+
+    border:2px solid black;
+    font-size: 1.5rem;
+    padding:0.8rem;
+    border-radius: 10px;
+    
+}
+
+.postItem:hover{
+
+    background-color: black;
+    color:white;
+
+}
+
+.credential{
+
+    color:white;
+    background-color: black;
+    padding:0.3rem;
+    
+}
+
+.peopleSection{
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin:1rem;
+
+}

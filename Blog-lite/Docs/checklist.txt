@@ -1,0 +1,11 @@
+App components 
+++++++++++++++
+
+Basic Login Form - √
+User authentication - √
+User Feed - √
+CRUD on posts - √
+CRUD on users - √
+post engagement (liking / commenting ) -√
+User activity GUI - √
+

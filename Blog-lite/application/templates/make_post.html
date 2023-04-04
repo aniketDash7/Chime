@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    New Post
+{% endblock %}
+
+{% block content %}
+
+<div class="container content-section">
+
+    <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <fieldset class="form_group">
+            <legend class="border-bottom mb-4">{{ legend }}</legend>
+            <div class="form-group">
+                {{form.title.label(class='form-control-label')}}
+                {% if form.title.errors %}
+                    {{form.title(class='form-control form-control-lg is-invalid')}}
+                    <div class="invalid-feedback">
+                        {% for error in form.title.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.title(class='form-control form-control-lg') }} 
+                {% endif %}
+
+
+            </div>
+            <div class="form-group">
+
+                {{form.desc.label(class='form-control-label')}}
+                {% if form.desc.errors %}
+                    {{form.desc(class='form-control form-control-lg is-invalid')}}
+                    <div class="invalid-feedback">
+                        {% for error in form.desc.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.desc(class='form-control form-control-lg') }} 
+                {% endif %}
+
+
+            </div>
+            <div class="form-group">
+                {{ form.imageUrl.label() }}
+                {{ form.imageUrl(class="form-control-file") }}
+                {% if form.imageUrl.errors %}
+                    {% for error in form.imageUrl.errors %}
+                        <span class="text-danger">{{ error }}</span><br>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            </fieldset>
+            <div class="form-group">
+                {{form.submit(class='btn btn-outline-info')}}
+            </div>
+
+    </form>
+</div>
+
+<style>
+
+    h4{
+
+        color:black;
+
+    }
+
+</style>
+
+{% endblock %}
+
+
+{% block sidebar %}
+
+    <h4>To make a post you have to specify:</h4>
+    <p>The title</p>
+    <p>The content of the post</p>
+    <p>The image field is optional</p>
+    <p>Allowed formats are '.jpg', '.png', '.jpeg'</p>
+
+{% endblock %}

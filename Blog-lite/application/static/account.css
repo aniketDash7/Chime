@@ -1,0 +1,26 @@
+.propic{
+
+    height:100px;
+    width:100px;
+
+}
+
+.peopleSection{
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin:1rem;
+
+}
+
+
+.accountInfo{
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+

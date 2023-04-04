@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block title %} {{user.username}} {% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{{url_for('static',filename='profile.css')}}">
+{% endblock %}
+
+{% block content %}
+    
+    <div class="usermeta">
+        <div class="info">
+            <div class="profilePhoto">
+                <img style="border:2px solid black" class="rounded-circle propic" src="{{ image }}" >
+            </div>
+            <div class="profileInfo">
+                <h1> <span id="userspan"> {{ user.username }}'s </span> Profile</h1>
+                <h4>Activity - {{ postNum }} Posts</h4>
+                {% if followNum > 0 %}
+                    <h4>Followed by {{ followNum }} people</h4>
+                {% else %}
+                    <h4>No followers yet :(</h4>
+                {% endif %}
+                
+                <h4>{{ followerNum }}</h4>
+            </div>
+        </div>
+        <div class="options">
+            {% if not current_user.is_following(user) %}
+                    <form class="followbutton" method='post' action="/follow/{{user.username}}">
+                        {{ form.hidden_tag() }}
+                        {{ form.submit(value="Follow")}}
+                    </form>
+
+            {% else %}
+                <form class="unfollowbutton" method="post" action="/unfollow/{{user.username}}">
+                    {{ form.hidden_tag() }}
+                    {{ form.submit(value="Unfollow") }}
+                </form>
+            {% endif %}
+        </div>
+    </div>
+    <hr>
+    <h2>Top Posts</h2>
+    <ul>
+        {% for post in profile_posts %}
+            <div class="postContainer">
+                
+                <h1>{{ post.title }}</h1>
+                <hr>
+                <p><span class="credential">By {{ post.author.username }} on {{ post.timeStamp.strftime('%d-%m-%Y')}} </span></p>
+                {% if post.desc|length > 250 %}
+                    <a style="display:block" data-toggle="collapse" href="#long-desc-{{post.id}}">View the whole thing</a>
+                    
+                    <div id="long-desc-{{post.id}}" class="collapse">
+                        <div class="card">
+                            <p>{{ post.desc }}</p>    
+                        </div>
+                    </div>
+                {% else %}
+                    <p>{{ post.desc }}</p>
+                {% endif %}
+                {% if post.imageUrl %}
+                    <img style="height:200px;" src="/static/images/{{post.imageUrl}}" alt="">
+                {% endif %}
+                <br>
+                {% if post.likes|length > 0 %}
+                    <i class="fa-solid fa-heart"></i>
+                    {{ post.likes|length }}
+                {% endif %} <br>
+                {% if post.comments|length > 0 %}
+                    <i class="fa-solid fa-comment"></i>
+                    {{ post.comments|length }}
+                {% endif %}
+
+            </div>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
+{% block sidebar %}
+<h3>People To Follow</h3>
+<p>See people on this app</p>
+
+{% for user in users %}
+   
+    <div class="peopleSection">
+
+        <a href="{{ url_for('profile', username=user.username) }}">{{ user.username }}</a>
+        <img class="rounded-circle" style="height:50px;width:50px;" src="/static/profilePics/{{ user.propic }}">
+      
+    </div>
+
+{% endfor %}
+
+{% endblock %}
